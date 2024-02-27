@@ -1,6 +1,12 @@
 import React from "react";
+import { useNavigate,Link } from 'react-router-dom'
 
 const Login = () => {
+  const navigate = useNavigate()
+
+  function handsubmit() {  
+     navigate("/")
+  }
   return (
     <div className="formContainer">
       <div class=" formWrapper">
@@ -10,9 +16,9 @@ const Login = () => {
           <input type="email" placeholder="email" />
           <input type="password" placeholder="password" />
 
-          <button>Sign in</button>
+          <button onClick={handsubmit}>Sign in</button>
         </form>
-        <p>You don't have an account? Register</p>
+        <p>You don't have an account? <Link to="/register">Register</Link></p>
       </div>
     </div>
   );

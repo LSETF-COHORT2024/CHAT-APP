@@ -1,6 +1,12 @@
 import React from "react";
+import { useNavigate,Link } from 'react-router-dom'
 
 const Register = () => {
+  const navigate = useNavigate()
+
+  function handsubmit() {  
+     navigate("/")
+  }
   return (
     <div className="formContainer">
       <div class=" formWrapper">
@@ -15,9 +21,9 @@ const Register = () => {
             <img src="" alt="" />
             <span>Add an avater </span>
           </label>
-          <button>Sign up</button>
+          <button onClick={handsubmit}>Sign up</button>
         </form>
-        <p>You do have an account? Login</p>
+        <p>You do have an account? <Link to="/login">Login</Link></p>
       </div>
     </div>
   );
