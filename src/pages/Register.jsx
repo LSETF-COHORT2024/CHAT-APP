@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { useNavigate,Link } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-  
-
+import { auth } from "../firebase";
 
 const Register = () => {
-  const [err , setErr]=useState(false)
+  const [error, setError] = useState(null);
+  const navigate =useNavigate()
 
   const handleSubmit = async (e) =>{
     e.preventDefault()
@@ -22,7 +21,7 @@ const Register = () => {
       const storage = getStorage();
       const storageRef = ref(storage, displayName);
       
-      const uploadTask = uploadBytesResumable(storageRef, files);
+      const uploadTask = uploadBytesResumable(storageRef, file);
       
       // Register three observers:
       uploadTask.on(
@@ -37,19 +36,19 @@ const Register = () => {
         }
       );
     } catch (err) {
-      setErr(true)
+      setError(err.message);
     }
+  };
 
-  }
   return (
     <div className="formContainer">
-      <div class=" formWrapper">
+      <div className="formWrapper">
         <span className="logo">CHAT APP</span>
         <span className="title"> Register</span>
         <form onSubmit={handleSubmit} >
           <input type="text" placeholder="Display Name" />
-          <input type="email" placeholder="Email" />
-          <input type="password" placeholder="Password" />
+          <input type="email" placeholder="email" />
+          <input type="password" placeholder="password" />
           <input style={{ display: "none" }} type="file" id="file" />
           <label htmlFor="file">
             <img src="" alt="" />
@@ -58,7 +57,7 @@ const Register = () => {
           <button >Sign up</button>
           {err && <span>something went wrong</span> } 
         </form>
-        <p>You do have an account? <Link to="/login">Login</Link></p>
+        <p>You already have an account? <Link to="/login">Login</Link></p>
       </div>
     </div>
   );
