@@ -1,64 +1,41 @@
 import React, { useState } from "react";
-import { useNavigate,Link } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-  
-
+import { auth } from "../firebase";
 
 const Register = () => {
-  const [err , setErr]=useState(false)
+  const [error, setError] = useState(null);
+  const navigate =useNavigate()
 
-  const handleSubmit = async (e) =>{
-    e.preventDefault()
-    const displayName = e.target[0].value;
-    const email = e.target[1].value;
-    const password = e.target[2].value;
-    const files = e.target[3].files[0];
-    
-    
-    try { const auth = getAuth();
-      const res = createUserWithEmailAndPassword(auth, email, password);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const displayName = e.target.displayName.value;
+    const email = e.target.email.value;
+    const password = e.target.password.value;
 
-      const storage = getStorage();
-      const storageRef = ref(storage, displayName);
-      
-      const uploadTask = uploadBytesResumable(storageRef, file);
-      
-      // Register three observers:
-      uploadTask.on(
-
-        (error) => {
-          setErr(true)
-        }, 
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            console.log('File available at', downloadURL);
-          });
-        }
-      );
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      navigate("/")
+      console.log("User created:", user);
     } catch (err) {
-      setErr(true)
+      setError(err.message);
     }
+  };
 
-  }
   return (
     <div className="formContainer">
-      <div class=" formWrapper">
+      <div className="formWrapper">
         <span className="logo">CHAT APP</span>
         <span className="title"> Register</span>
-        <form onSubmit={handleSubmit} >
-          <input type="text" placeholder="Display Name" />
-          <input type="email" placeholder="email" />
-          <input type="password" placeholder="password" />
-          <input style={{ display: "none" }} type="file" id="file" />
-          <label htmlFor="file">
-            <img src="" alt="" />
-            <span>Add an avater </span>
-          </label>
-          <button >Sign up</button>
-          {err && <span>something went wrong</span> } 
+        <form onSubmit={handleSubmit}>
+          <input type="text" name="displayName" placeholder="Display Name" />
+          <input type="email" name="email" placeholder="Email" />
+          <input type="password" name="password" placeholder="Password" />
+          <button>Sign up</button>
+          {error && <span>{error}</span>}
         </form>
-        <p>You do have an account? <Link to="/login">Login</Link></p>
+        <p>You already have an account? <Link to="/login">Login</Link></p>
       </div>
     </div>
   );
