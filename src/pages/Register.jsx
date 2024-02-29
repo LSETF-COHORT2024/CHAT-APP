@@ -22,7 +22,7 @@ const Register = () => {
       const storage = getStorage();
       const storageRef = ref(storage, displayName);
       
-      const uploadTask = uploadBytesResumable(storageRef, file);
+      const uploadTask = uploadBytesResumable(storageRef, files);
       
       // Register three observers:
       uploadTask.on(
