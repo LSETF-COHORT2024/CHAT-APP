@@ -17,17 +17,13 @@ const Register = () => {
       const email = e.target[1].value;
       const password = e.target[2].value;
       const file = e.target[3].files[0];
-    
+      
       try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    
-        console.log("Display Name:", displayName);
         const storage = getStorage();
         const storageRef = ref(storage, displayName);
     
         const uploadTask = uploadBytesResumable(storageRef, file);
-    
-        // Register three observers:
         uploadTask.on(
           (error) => {
             setError(error.message);
@@ -44,7 +40,9 @@ const Register = () => {
                 email,
                 photoURL:downloadURL,
               })
-            })
+              
+              navigate("/")
+            });
           }
         );
         
