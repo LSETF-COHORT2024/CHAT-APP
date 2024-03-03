@@ -11,24 +11,50 @@ const Register = () => {
   const navigate =useNavigate()
 
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const displayName = e.target.displayName.value;
-    const email = e.target.email.value;
-    const password = e.target.password.value;
-
-    try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;
-      navigate("/")
-      console.log("User created:", user);
-    } catch (err) {
-      setError(err.message);
-    }
-  };
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      const displayName = e.target[0].value;
+      const email = e.target[1].value;
+      const password = e.target[2].value;
+      const file = e.target[3].files[0];
+      
+      try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const storage = getStorage();
+        const storageRef = ref(storage, displayName);
+    
+        const uploadTask = uploadBytesResumable(storageRef, file);
+        uploadTask.on(
+          (error) => {
+            setError(error.message);
+          },
+          () => {
+            getDownloadURL(uploadTask.snapshot.ref).then( async (downloadURL)=>{
+              await updateProfile ( userCredential.user,{
+                displayName,
+                photoURL:downloadURL, 
+              })
+              await setDoc(doc(db,"users",userCredential.user.uid),{
+                uid:userCredential.user.uid,
+                displayName,
+                email,
+                photoURL:downloadURL,
+              })
+              
+              navigate("/")
+            });
+          }
+        );
+        
+      } catch (err) {
+        setError(err.message);
+      }
+    };
+    
 
   return (
-    <div className="formContainer">
+    <>
+          <div className="formContainer">
       <div className="formWrapper">
         <span className="logo">CHAT APP</span>
         <span className="title"> Register</span>
@@ -42,6 +68,7 @@ const Register = () => {
         <p>You already have an account? <Link to="/login">Login</Link></p>
       </div>
     </div>
+    </>
   );
 };
 
