@@ -1,12 +1,22 @@
 import React from "react";
 import { useNavigate,Link } from 'react-router-dom'
+import { UserAuth } from "../context/AuthContext";
 
 const Login = () => {
+  const { currentUser } = UserAuth();
   const navigate = useNavigate()
 
+  // const handsubmit = async () => {
+  //   try {
+
+  //   } catch(error)
+    
+  // }
+
   function handsubmit() {  
-     navigate("/")
-  }
+    navigate("/")
+ }
+  
   return (
     <div className="formContainer">
       <div class=" formWrapper">

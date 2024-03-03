@@ -6,10 +6,12 @@ import "./style.scss";
 import { BrowserRouter,
   Routes,
   Route } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
 
 const App = () => {
   return (
     <>
+    <AuthProvider>
     <BrowserRouter>
  <Routes>
   <Route path="/">
@@ -19,6 +21,7 @@ const App = () => {
   </Route>
  </Routes>
  </BrowserRouter>
+ </AuthProvider>
 </>
   
   )
