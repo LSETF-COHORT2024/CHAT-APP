@@ -34,15 +34,16 @@ const Register = () => {
                 displayName,
                 photoURL:downloadURL, 
               })
-              await setDoc(doc(db,"users",userCredential.user.uid),{
+              await setDoc(doc(db,"users",userCredential.user.uid),{   
                 uid:userCredential.user.uid,
                 displayName,
                 email,
                 photoURL:downloadURL,
               })
-              
-              navigate("/")
+              await setDoc(doc(db,"userchats",userCredential.user.uid),{})
+         
             });
+            navigate("/")
           }
         );
         
@@ -62,10 +63,16 @@ const Register = () => {
           <input type="text" name="displayName" placeholder="Display Name" />
           <input type="email" name="email" placeholder="Email" />
           <input type="password" name="password" placeholder="Password" />
+          <input type="file" id="file" style={{display:"none"}} />
+          <label htmlFor="file">
+            <img src={img} alt="" />
+            
+            <span>Add an avater</span>
+            </label>
           <button>Sign up</button>
           {error && <span>{error}</span>}
         </form>
-        <p>You already have an account? <Link to="/login">Login</Link></p>
+        <p>You already have an account? <Link to="/">Login</Link></p>
       </div>
     </div>
     </>
