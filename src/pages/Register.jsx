@@ -34,15 +34,16 @@ const Register = () => {
                 displayName,
                 photoURL:downloadURL, 
               })
-              await setDoc(doc(db,"users",userCredential.user.uid),{
+              await setDoc(doc(db,"users",userCredential.user.uid),{   
                 uid:userCredential.user.uid,
                 displayName,
                 email,
                 photoURL:downloadURL,
               })
-              
-              navigate("/")
+              await setDoc(doc(db,"userchats",userCredential.user.uid),{})
+         
             });
+            navigate("/")
           }
         );
         
@@ -53,7 +54,8 @@ const Register = () => {
     
 
   return (
-    <div className="formContainer">
+    <>
+          <div className="formContainer">
       <div className="formWrapper">
         <span className="logo">CHAT APP</span>
         <span className="title"> Register</span>
@@ -73,6 +75,7 @@ const Register = () => {
         <p>You already have an account? <Link to="/login">Login</Link></p>
       </div>
     </div>
+    </>
   );
 };
 
