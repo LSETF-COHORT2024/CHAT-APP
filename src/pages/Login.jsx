@@ -25,7 +25,7 @@ const Login = () => {
 
   return (
     <>
-      {/* <div className="formContainer">
+      <div className="formContainer">
       <div className=" formWrapper">
         <span className="logo">CHAT APP</span>
         <span className="title"> Login</span>
@@ -39,8 +39,8 @@ const Login = () => {
         </form>
         <p>You don't have an account? <Link to="/register">Register</Link></p>
       </div>
-    </div> */}
-    <div className="hero min-h-screen bg-base-200">
+    </div>
+    {/* <div className="hero min-h-screen bg-base-200">
         <div className="hero-content flex-col lg:flex-row-reverse">
             <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
             <span className="logo">CHAT APP</span>
@@ -63,7 +63,7 @@ const Login = () => {
             </form>
             </div>
         </div>
-        </div>
+        </div> */}
     </>
   );
 };
