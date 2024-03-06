@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @mixin mobile{
   @media screen and (max-width:480px){
     @content
@@ -78,6 +82,10 @@
   }
 }
 
+.search .err {
+  color: #fff;
+}
+
 .home {
   background-color: #a7bcff;
   height: 100vh;
@@ -145,15 +153,32 @@
       }
       .search {
         border-bottom: 1px solid gray;
+        
 
         .searchForm {
           padding: 10px;
+          display: flex;
+
+          button{
+            display: flex;
+            justify-content: end;
+            // padding-right: 100px;
+            align-content: end;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            cursor: pointer;
+            color: #fff;
+            background-color:#a7bcff ;
+            box-shadow: none;
+          }
 
           input {
             background-color: transparent;
             border: none;
             color: white;
             outline: none;
+            width: 100%;
+            
 
             &::placeholder {
               color: lightgray;
