@@ -63,7 +63,6 @@
 
 
 import React, { useContext, useState } from "react";
-import Picture from "../img/pic-article-01.jpg";
 import { db } from "../firebase";
 import { collection, query, where, getDocs, updateDoc, serverTimestamp, doc, getDoc, setDoc } from "firebase/firestore";
 import { AuthContext } from "../context/AuthContexts";
@@ -74,6 +73,7 @@ const Search = () => {
   const [err, setErr] = useState(false);
 
   const {currentUser} = useContext(AuthContext)
+ 
 
   const handleSearch = async () => {
     const q = query(
@@ -96,7 +96,8 @@ const Search = () => {
   };
 
   const handleSelect = async () => {
-    const combineId = currentUser.uid > user.uid
+    const combineId =
+     currentUser.uid > user.uid
       ? currentUser.uid + user.uid
       : user.uid + currentUser.uid;
 
@@ -105,11 +106,11 @@ const Search = () => {
 
     if(!res.exist()){
       // create a chat in chats collection
-      await setDoc(doc, (db, "chats", combineId), {messages: [] })
+      await setDoc(doc(db, "chats", combineId), {messages: [] })
 
       // create user chats
       await updateDoc(doc(db, "userChats", currentUser.uid), {
-        [combineId+"userInfo"]: {
+        [combineId+".userInfo"]: {
           uid:user.uid,
           displayName:user.displayName,
           photoURL: user.photoURL
@@ -117,11 +118,11 @@ const Search = () => {
         [combineId+".date"]: serverTimestamp()
       });
 
-      await setDoc(doc, (db, "chats", combineId), {messages: [] })
+      await setDoc(doc(db, "chats", combineId), {messages: [] })
 
       // create user chats
       await updateDoc(doc(db, "userChats", user.uid), {
-        [ combineId+"userInfo"]: {
+        [ combineId+".userInfo"]: {
           uid:currentUser.uid,
           displayName:currentUser.displayName,
           photoURL: currentUser.photoURL
@@ -149,8 +150,9 @@ const Search = () => {
           </div>
           {err && <span className="err">User not found!</span>}
           {user && (
-            <div className="userChat">
-              <img src={user.photoURL} alt="User Picture" />
+            <div className="userChat" onClick={handleSelect}>
+              <img src={user.photoURL} 
+              alt="" />
               <div className="userChatInfo">
                 <span>{user.displayName}</span>
               </div>

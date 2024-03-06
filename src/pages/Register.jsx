@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, Link } from 'react-router-dom'
 import img from "../img/icons8-image-24.png"
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth, db} from "../firebase";
+import { db} from "../firebase";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore"; 
 
@@ -19,6 +19,7 @@ const Register = () => {
       const file = e.target[3].files[0];
       
       try {
+        const auth = getAuth();
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const storage = getStorage();
         const storageRef = ref(storage, displayName);

@@ -1,12 +1,11 @@
 import React, { useContext, useEffect, useRef } from "react";
-import img from "../img/pic-person-01.jpg"
 import { AuthContext } from "../context/AuthContexts";
 import { ChatContext } from "../context/ChatContext";
 
 const Message = ({message}) => {
 
-  const {currentUser} = useContext(AuthContext)
-  const {data} = useContext(ChatContext)
+  const { currentUser } = useContext(AuthContext)
+  const { data } = useContext(ChatContext)
 
   const ref = useRef()
 

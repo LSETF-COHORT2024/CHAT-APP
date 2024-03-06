@@ -21,7 +21,7 @@ const Navbar = () => {
 
   return (
     <div className="navbar">
-      <span className="logo">Innkeeper chat</span>
+      <span className="logo">Chat App</span>
       <div className="user">
         {currentUser && (
           <>
