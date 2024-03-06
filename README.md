@@ -1,5 +1,3 @@
-CHAT APP
-
 Overview
 Welcome to our Chat App! This application provides a platform for real-time communication between users. Whether you want to chat with friends, colleagues, or family, our app offers a seamless and user-friendly experience.
 
@@ -51,5 +49,5 @@ After A successful login you will be directed to your personalised Dashboard wer
 ![Chat_Environment](https://res.cloudinary.com/dwqn2rcuu/image/upload/v1709727320/personalise_chat_environment_agjzhv.png)
 
 ### Logout
-
 ![Chat_Environment](https://res.cloudinary.com/dwqn2rcuu/image/upload/v1709727320/personalise_chat_environment_agjzhv.png)
+
