@@ -1,7 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 .formContainer {
   background-color: #a7bcff;
   height: 100vh;
@@ -64,6 +63,10 @@
   color: #5d5b8d;
   font-size: 12px;
   margin-top: 10px;
+}
+
+.search .err {
+  color: #fff;
 }
 
 .home {
@@ -138,12 +141,25 @@
 }
 .home .container .sidebar .search .searchForm {
   padding: 10px;
+  display: flex;
+}
+.home .container .sidebar .search .searchForm button {
+  display: flex;
+  justify-content: end;
+  align-content: end;
+  border-radius: 4px;
+  font-family: "Courier New", Courier, monospace;
+  cursor: pointer;
+  color: #fff;
+  background-color: #a7bcff;
+  box-shadow: none;
 }
 .home .container .sidebar .search .searchForm input {
   background-color: transparent;
   border: none;
   color: white;
   outline: none;
+  width: 100%;
 }
 .home .container .sidebar .search .searchForm input::-moz-placeholder {
   color: lightgray;

@@ -1,27 +1,41 @@
 import React from "react";
 import { useNavigate,Link } from 'react-router-dom'
 import { useState } from "react";
-import {  signInWithEmailAndPassword } from "firebase/auth"; 
-import { auth } from "../firebase";
-
+// import {  signInWithEmailAndPassword } from "firebase/auth"; 
+// import { auth } from "../firebase";
+import googleicon from "../img/search.png"
+import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 
 const Login = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate()
 
 
-    const handleSubmit = async (e) => {
-      e.preventDefault()
-      const email = e.target[0].value;
-      const password = e.target[1].value;
+  const handleGoogleSignIn = async () => {
+    try {
+      const auth = getAuth();
+      const provider = new GoogleAuthProvider();
+      await signInWithPopup(auth, provider);
+      navigate("/")
+    } catch (err) {
+      setError(err.message);
       
-      try {
-        await signInWithEmailAndPassword(auth, email, password)
-        navigate("/")
-      } catch (err) {
-        setError(err.message);
-      }
-    };
+    }
+   
+  };
+
+    // const handleSubmit = async (e) => {
+    //   e.preventDefault()
+    //   const email = e.target[0].value;
+    //   const password = e.target[1].value;
+      
+    //   try {
+    //     await signInWithEmailAndPassword(auth, email, password)
+    //     navigate("/")
+    //   } catch (err) {
+    //     setError(err.message);
+    //   }
+    // };
 
   return (
     <>
@@ -29,11 +43,14 @@ const Login = () => {
       <div className=" formWrapper">
         <span className="logo">CHAT APP</span>
         <span className="title"> Login</span>
-        <form onSubmit={handleSubmit}>
+        <form >
           <input type="email" placeholder="email" id="email" />
           <input type="password" placeholder="password" id="password"/>
 
-          <button >Sign in</button>
+          <button onClick={handleGoogleSignIn}>
+            <img id="google" src={googleicon} alt="google" />
+            <span>sign in with google</span>
+          </button>
           {error && <span>{error}</span>}
 
         </form>

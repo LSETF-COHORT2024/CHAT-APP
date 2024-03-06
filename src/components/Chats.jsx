@@ -23,7 +23,7 @@ const Chats = () => {
       ;}
     };
 
-    currentUser.uid && getChats()
+    // currentUser.uid && getChats()
   },[currentUser.uid])
 
   const handleSelect = (u)=>{

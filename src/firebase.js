@@ -1,6 +1,6 @@
 
 import { initializeApp } from "firebase/app";
-import { getAuth} from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup} from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 const firebaseConfig = {
@@ -17,4 +17,18 @@ const firebaseConfig = {
  export const auth =getAuth();
  export const storage = getStorage();
  export const db = getFirestore(app);
-   
+//  export const provider = new GoogleAuthProvider();  
+// const googlelogin = document.getElementById("google");
+// googlelogin.addEventListener("click",function(){
+//   signInWithPopup(auth, provider)
+//   .then((result) => {
+//     const credential = GoogleAuthProvider.credentialFromResult(result);
+//     const token = credential.accessToken;
+//     const user = result.user;
+//     console.log(user);
+//     window.location.href =""
+//   }).catch((error) => {
+//     const errorCode = error.code;
+//     const errorMessage = error.message;
+//   });
+// })
