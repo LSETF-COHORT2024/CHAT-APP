@@ -5,9 +5,11 @@ import More from "../img/icons8-more-50.png"
 import Messages from "./Messages";
 import Input from "./Input";
 import { ChatContext } from "../context/ChatContext";
+
   	      
 const Chat = () => {
   const { data } = useContext(ChatContext)
+
 
   return (
     <div className="chat">
@@ -23,6 +25,6 @@ const Chat = () => {
       <Input />
     </div>
   );
-};
+}
 
 export default Chat;
