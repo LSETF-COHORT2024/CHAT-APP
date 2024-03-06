@@ -21,14 +21,18 @@ const Navbar = () => {
 
   return (
     <div className="navbar">
-      <span className="logo">Innkeeper chat</span>
+      <span className="logo">Chat App</span>
       <div className="user">
-        <img src={currentUser.photoURL} alt="" />
-        <span>{currentUser.displayName}</span>
-        <button onClick={handleLogout}>Logout</button> {/* Call handleLogout on button click */}
+        {currentUser && (
+          <>
+            <img src={currentUser.photoURL} alt="" />
+            <span>{currentUser.displayName}</span>
+            <button onClick={handleLogout}>Logout</button>
+          </>
+        )}
       </div>
     </div>
-  );
+  );  
 };
 
 export default Navbar;

@@ -36,6 +36,13 @@ const Login = () => {
           {error && <span>{error}</span>}
 
         </form>
+        {/* <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <img src="your-image-url-here.png" alt="Your Image" style={{ width: '200px', height: '200px' }} />
+      <GoogleSignin onClick={() => signInWithGoogle()} />
+      {loading && <div>Loading...</div>}
+      {error && <div>{error.message}</div>}
+      {user && <div>Welcome, {user.displayName}!</div>}
+    </div> */}
         <p>You don't have an account? <Link to="/register">Register</Link></p>
       </div>
     </div>
